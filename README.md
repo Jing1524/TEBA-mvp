@@ -30,7 +30,7 @@ This project ingests messy transaction data, normalizes merchants, categorizes s
 
 ## 📐 Architecture (WIP)
 
-See [`/docs/architecture.md`](docs/architecture.md) for diagrams.  
+See [`docs/architecture.md`](docs/architecture.md) for diagrams.  
 _(ER diagram, event flow, and transaction lifecycle to be added.)_
 
 ---
