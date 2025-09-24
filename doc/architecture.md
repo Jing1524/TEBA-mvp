@@ -165,13 +165,13 @@ text kind
 uuid ref_id
 jsonb payload
 }
+```
 
 Accounts → Transactions: an account has many transactions.
 Merchants/Categories → Transactions: each transaction maps to one merchant & category.
 Budgets: tie a category to an account for a given month.
 Insights: generated per account, often triggered by transactions.
 Event_outbox: reliable event queue. Audit_log: who changed what, when.
-```
 
 ### Transaction Lifecycle (State Diagram)
 
@@ -206,7 +206,3 @@ Outbox + cron over queue infra: simpler yet robust; FOR UPDATE SKIP LOCKED enabl
 Rule-first, LLM-second: deterministic, auditable, cheaper; fallback only on misses with caching.
 SSE over polling: lightweight near-real-time UI invalidation.
 Cents as int: avoid float rounding errors.
-
-```
-
-```
