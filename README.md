@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TEBA MVP (Transaction Enrichment & Budget Alerts)
 
-## Getting Started
+🚀 **Goal:** A fintech-inspired MVP built with **Next.js (App Router, RSC, Server Actions, streaming)**, **Prisma + Postgres (Neon)**, and **event-driven enrichment (outbox pattern)**.  
+This project ingests messy transaction data, normalizes merchants, categorizes spending, detects anomalies/recurring charges, and surfaces **budget insights with explainability**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔑 Features (planned)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Upload CSV → **transactions ingestion** with idempotency
+- **Event-driven enrichment** pipeline (rules + LLM fallback)
+- Merchant normalization & categorization
+- **Budget management** with overspend alerts
+- **Insights**: unusual spikes, recurring charges
+- Optimistic UI for re-categorization
+- Streaming dashboard (KPIs, category breakdown, alerts)
+- Explain panel with natural-language insights
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+- **Frontend:** Next.js 15, React Server Components, Tailwind, shadcn/ui
+- **Backend:** Next.js Route Handlers, Server Actions, Prisma
+- **Database:** Postgres (Neon)
+- **AI (bounded):** LLM fallback for categorization + explain panel
+- **Tooling:** ESLint, Prettier, Husky + lint-staged
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📐 Architecture (WIP)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See [`/docs/architecture.md`](docs/architecture.md) for diagrams.  
+_(ER diagram, event flow, and transaction lifecycle to be added.)_
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚧 Status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Scaffold project
+- [ ] DB schema & migrations
+- [ ] CSV ingestion → outbox events
+- [ ] Worker enrichment loop
+- [ ] Dashboard KPIs + charts
+- [ ] Budgets + insights
+- [ ] Explain panel
+
+---
+
+## 📝 Demo Script (planned)
+
+1. Upload CSV → transactions appear
+2. Worker runs → enrichment + insights
+3. Dashboard shows KPIs + anomalies
+4. Edit a transaction category → optimistic update
+5. Open Explain Panel → summary bullets + suggestion
+
+---
+
+## 📄 License
+
+MIT
