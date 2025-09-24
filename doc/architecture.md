@@ -59,7 +59,7 @@ SSE nudges the UI to refresh server-rendered KPIs without heavy polling.
 
 ### Event Processing Sequence
 
-````mermaid
+```mermaid
 sequenceDiagram
 participant UI as Browser
 participant SA as Server Action (/upload)
@@ -91,8 +91,10 @@ WK->>DB: UPDATE outbox SET processed_at = now()
 WK-->>SSE: Emit invalidation hint
 SSE-->>UI: Push live update → RSC re-fetch KPIs
 ```
+
 ### Entity–Relationship (ER) Diagram
 
+```mermaid
 erDiagram
 ACCOUNTS ||--o{ TRANSACTIONS : "has many"
 MERCHANTS ||--o{ TRANSACTIONS : "provides"
@@ -169,6 +171,7 @@ Merchants/Categories → Transactions: each transaction maps to one merchant & c
 Budgets: tie a category to an account for a given month.
 Insights: generated per account, often triggered by transactions.
 Event_outbox: reliable event queue. Audit_log: who changed what, when.
+```
 
 ### Transaction Lifecycle (State Diagram)
 
@@ -194,6 +197,7 @@ Enriched --> EnrichmentQueued : reprocess requested
 InsightEmitted --> [*]
 DuplicateIgnored --> [*]
 Enriched --> [*]
+```
 
 ### Design Notes & Tradeoffs
 
@@ -202,4 +206,7 @@ Outbox + cron over queue infra: simpler yet robust; FOR UPDATE SKIP LOCKED enabl
 Rule-first, LLM-second: deterministic, auditable, cheaper; fallback only on misses with caching.
 SSE over polling: lightweight near-real-time UI invalidation.
 Cents as int: avoid float rounding errors.
-````
+
+```
+
+```
