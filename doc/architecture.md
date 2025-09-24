@@ -59,6 +59,7 @@ SSE nudges the UI to refresh server-rendered KPIs without heavy polling.
 
 ### Event Processing Sequence
 
+````mermaid
 sequenceDiagram
 participant UI as Browser
 participant SA as Server Action (/upload)
@@ -171,6 +172,7 @@ Event_outbox: reliable event queue. Audit_log: who changed what, when.
 
 ### Transaction Lifecycle (State Diagram)
 
+```mermaid
 stateDiagram-v2
 [*] --> Ingested
 
@@ -200,3 +202,4 @@ Outbox + cron over queue infra: simpler yet robust; FOR UPDATE SKIP LOCKED enabl
 Rule-first, LLM-second: deterministic, auditable, cheaper; fallback only on misses with caching.
 SSE over polling: lightweight near-real-time UI invalidation.
 Cents as int: avoid float rounding errors.
+````
