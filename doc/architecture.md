@@ -90,7 +90,7 @@ end
 WK->>DB: UPDATE outbox SET processed_at = now()
 WK-->>SSE: Emit invalidation hint
 SSE-->>UI: Push live update → RSC re-fetch KPIs
-
+```
 ### Entity–Relationship (ER) Diagram
 
 erDiagram
