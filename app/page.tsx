@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '../components/ui/button'
 import Image from 'next/image'
-import { prisma } from '../../lib/db'
+import { prisma } from '../lib/db'
 
 export default async function Home() {
   const catagory = await prisma.category.findMany({ orderBy: { code: 'asc' } })

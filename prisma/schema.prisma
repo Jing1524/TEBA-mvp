@@ -15,6 +15,7 @@ enum Direction {
 
 model Account {
   id     String        @id @default(uuid())
+  code   String        @unique 
   userId String
   name   String
   tx     Transaction[]
@@ -24,7 +25,7 @@ model Merchant {
   id             String        @id @default(uuid())
   displayName    String
   normalizedName String?       @unique
-  tx             Transaction[]
+  tx             Transaction[] 
 }
 
 model Category {
@@ -38,7 +39,7 @@ model Category {
 model Transaction {
   id              String     @id @default(uuid())
   accountId       String
-  postedAt        DateTime
+  postedAt        DateTime   @db.Date
   amountCents     Int
   rawDescription  String
   direction       Direction
@@ -61,7 +62,7 @@ model Budget {
   id           String   @id @default(uuid())
   userId       String
   categoryId   String
-  month        DateTime // store as first day of month
+  month        DateTime @db.Date
   amountCents  Int
 
   category Category @relation(fields: [categoryId], references: [id])
