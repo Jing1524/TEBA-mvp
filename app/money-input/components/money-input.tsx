@@ -1,12 +1,13 @@
 'use client'
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { ChangeEventHandler, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { UsdCents, parseMoneyToCents, formatCentsToMoney } from '@/app/money-input/lib/money'
+import { on } from 'events'
 
 type MoneyInputProps = {
   id?: string
   label: string
   valueCents: UsdCents | null
-  onChange: (cents: UsdCents | null) => void
+  onChange: (value: UsdCents | null) => void
   description?: string
   required?: boolean
   stepCents?: number // default 1 (one cent)
@@ -28,11 +29,8 @@ export function MoneyInput({
   const errId = `${inputId}-err`
   const [text, setText] = useState<string>('')
 
-  // Keep text in sync when parent value changes (e.g., form resets)
   useEffect(() => {
-    if (valueCents == null) {
-      setText('')
-    } else {
+    if (valueCents !== null) {
       setText(formatCentsToMoney(valueCents))
     }
   }, [valueCents])
@@ -42,12 +40,19 @@ export function MoneyInput({
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const next = e.target.value
+    console.log('handleChange', { next })
     setText(next)
+    console.log('handleChange setText', { text })
     const cents = parseMoneyToCents(next)
     onChange(cents) // may be null while typing → caller can validate/disable submit
   }
 
   function handleBlur() {
+    const trimmed = text.trim()
+    if (trimmed === '') {
+      onChange(null)
+      return
+    }
     const cents = parseMoneyToCents(text)
     if (cents != null) {
       // snap to canonical formatting on blur

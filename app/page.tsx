@@ -1,3 +1,4 @@
+import { DailyCalendar } from './calendarPractice/page'
 import MoneyInputDemo from './money-input/page'
 
 export default async function Home() {
@@ -5,7 +6,8 @@ export default async function Home() {
 
   return (
     <h1 className="flex flex-col items-center justify-center min-h-screen p-4">
-      <MoneyInputDemo />
+      {/* <MoneyInputDemo /> */}
+      <DailyCalendar />
     </h1>
   )
 }
