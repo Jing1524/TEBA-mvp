@@ -1,4 +1,4 @@
-import { DailyCalendar } from './calendarPractice/page'
+import { DailyCalendar } from './calendarPractice/components/DailyCalendar'
 import MoneyInputDemo from './money-input/page'
 
 export default async function Home() {

@@ -35,3 +35,31 @@ export const is_Over_lapping = (eventData: CalEvent) => {
   const event_end = event_min(eventData.end)
   return event_start >= event_end
 }
+
+// partition events into different columns to handle overlapping events
+type partitioed = CalEvent & { col_index: number; totalCols: number }
+export const partition_events = (Events: CalEvent[]) => {
+  const columns: { endTime: string }[] = []
+  const partitioned: partitioed[] = []
+
+  const sortedEvents = Events.sort((a, b) => event_min(a.start) - event_min(b.start))
+
+  for (const event of sortedEvents) {
+    let col_index = -1
+    for (let i = 0; i < columns.length; i++) {
+      if (event_min(columns[i].endTime) <= event_min(event.start)) {
+        col_index = i
+        break
+      }
+    }
+    if (col_index === -1) {
+      col_index = columns.length
+      columns.push({ endTime: event.end })
+    } else {
+      columns[col_index].endTime = event.end
+    }
+    partitioned.push({ ...event, col_index, totalCols: 0 })
+  }
+  const totalCols = Math.max(1, columns.length)
+  return partitioned.map((event) => ({ ...event, totalCols }))
+}
